@@ -10,6 +10,8 @@ import { CircleQuestionMark, Hash, LayoutTemplate, User } from "lucide-react";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useAppSelector } from "@/redux/store";
+import { useAuth } from "@/hooks/use-auth";
+import CreateProject from "../buttons/project";
 
 type TabProps = {
   label: string;
@@ -21,7 +23,7 @@ const Navbar = () => {
   const params = useSearchParams();
   const pathname = usePathname();
   const projectId = params.get("project");
-
+  const {handleSignOut} = useAuth()
   const me = useAppSelector((state)=>state.profile)
 
   const tabs: TabProps[] = [
@@ -48,8 +50,7 @@ const Navbar = () => {
       <div className="flex items-center gap-4">
         <Link
           href={`/dashboard/${me.name}`}
-          className="w-8 h-8 rounded-full border-3 border-white bg-black flex items-center justify-center"
-        >
+          className="w-8 h-8 rounded-full border-3 border-white bg-black flex items-center justify-center">
           <div className="w-4 h-4 rounded-full bg-white"></div>
         </Link>
 
@@ -102,9 +103,9 @@ const Navbar = () => {
             <User className="size-5 text-black" />
           </AvatarFallback>
         </Avatar>
-
+    <Button onClick={handleSignOut}>Sign out</Button>
         {/* {hasCanvas && <Autosave />} */}
-        {/* {hasCanvas && !hasStyleGuide && <CreateProject />} */}
+        {!hasCanvas && !hasStyleGuide && <CreateProject />}
       </div>
     </div>
   );

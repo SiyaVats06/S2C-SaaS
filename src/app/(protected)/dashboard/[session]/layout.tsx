@@ -9,11 +9,11 @@ type Props = {
 };
 
 const Layout = async ({ children }: Props) => {
-//   const { entitlement, profileName } = await SubscriptionEntitlementQuery();
+  // const { entitlement, profileName } = await SubscriptionEntitlementQuery();
 
-//   if (!entitlement._valueJSON) {
-//     redirect(`/dashboard/${combinedSlug(profileName!)}`);
-//   }
+  // if (!entitlement._valueJSON) {
+  //   redirect(`/dashboard/${combinedSlug(profileName!)}`);
+  // }
   return (
     <div className="grid grid-cols-1">
       <Navbar />

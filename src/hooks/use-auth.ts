@@ -14,7 +14,7 @@ const signInSchema = z.object({
 
 const signUpSchema = z.object({
   firstName: z.string().min(1, "First Name is Required"),
-  lastNmae: z.string().min(1, "Last Name is Required"),
+  lastName: z.string().min(1, "Last Name is Required"),
   email: z.email("Invalid email Address"),
   password: z.string().min(6, "Password must be atleast 6 characterstics"),
 });
@@ -39,7 +39,7 @@ export const useAuth = () => {
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       firstName: "",
-      lastNmae: "",
+      lastName: "",
       email: "",
       password: "",
     },
@@ -65,18 +65,19 @@ export const useAuth = () => {
   };
 
   const handleSignUp = async (data: SignUpData) => {
+    console.log(data)
     setIsLoading(true);
     try {
       await signIn("password", {
         email: data.email,
         password: data.password,
-        name: `${data.firstName} ${data.lastNmae}`,
+        name: `${data.firstName} ${data.lastName}`,
         flow: "signUp",
       });
       router.push("/dashboard");
     } catch (error) {
       console.log("SignUp Error", error);
-      signInForm.setError("root", {
+      signUpForm.setError("root", {
         message: "Failed to create accout. Email may already exist.",
       });
     } finally {

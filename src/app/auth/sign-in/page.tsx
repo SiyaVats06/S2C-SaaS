@@ -1,6 +1,6 @@
 "use client";
 
-import Google from "@/components/oauth/Google";
+import Google from "@/components/buttons/oauth/Google";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -71,7 +71,7 @@ export default function LoginPage() {
               <Input
                 type="password"
                 id="password"
-                {...register("email")}
+                {...register("password")}
                 className={errors.password ? "border-destructive" : ""}
               />
               {errors.password && (
@@ -106,9 +106,9 @@ export default function LoginPage() {
             <hr className="my-4 border-dashed" />
           </div>
 
-          <div className=" grid grid-cols-2 gap-3">
+          <div className=" grid grid-cols-1">
             <Google />
-            <Button type="button" variant="outline">
+            {/* <Button type="button" variant="outline">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="1em"
@@ -127,7 +127,7 @@ export default function LoginPage() {
                 ></path>
               </svg>
               <span>Microsoft</span>
-            </Button>
+            </Button> */}
           </div>
         </div>
 

@@ -1,6 +1,6 @@
 const page = () => {
   return (
-    <div>pagdsfdse</div>
+    <div>Session Page</div>
   )
 }
 

@@ -30,8 +30,18 @@ export const normalizeProfile = (
       .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
       .join(' ')
   }
-  const name = combinedSlug(raw.name!) || extractNameFromEmail(raw.email)
 
+  //TO DO: Send name into the convex DB during SignUP and send in combinedSlug(raw.name!)
+  
+  // const name = combinedSlug(raw.name!) || extractNameFromEmail(raw.email)
+
+  const name = raw?.name? combinedSlug(raw.name!) : extractNameFromEmail(raw.email)
+
+  // const combinedSlugName = combinedSlug(raw.name!)
+  // const name = combinedSlugName==='untitled'? extractNameFromEmail(raw.email): combinedSlugName
+
+  console.log("name", name);
+  
   return {
     id: raw._id,
     createdAtMs: raw._creationTime,
