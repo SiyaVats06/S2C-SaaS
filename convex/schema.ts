@@ -50,14 +50,14 @@ const schema = defineSchema({
     viewportData: v.optional(v.any()), // JSON structure
     generatedDesignData: v.optional(v.any()), // JSON str
     thumbnail: v.optional(v.string()), // Base64 or URL
-    moodBoardImages: v.optional(v.array(v.string())),
+    moodBoardImages: v.optional(v.array(v.id("_storage"))),
     inspirationImages: v.optional(v.array(v.string())), // inspiration images (max 6)
     lastModified: v.number(), // Timestamp for last mod
     createdAt: v.number(), // Project creation timestamp
     isPublic: v.optional(v.boolean()), // For future shar
     tags: v.optional(v.array(v.string())), // For future t
     projectNumber: v.number(), // Auto-incrementing pro
-  }).index("by_userId", ["userId"]),
+  }).index("by_userId", ["userId"]).index("by_userId_lastModified", ["userId", "lastModified"]),
 
   project_counters: defineTable({
     userId: v.id("users"),

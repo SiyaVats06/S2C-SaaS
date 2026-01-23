@@ -1,6 +1,6 @@
 'use client'
 
-import { addProject, createProjectStartAction } from "@/redux/slice/projects";
+import { addProject, createProjectStartAction, createProjectSuccess } from "@/redux/slice/projects";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { fetchMutation } from "convex/nextjs";
 import { toast } from "sonner";
@@ -53,7 +53,7 @@ export const useProjectCreation = () => {
       toast.error("Please sign in to create Projects");
       return;
     }
-    // dispatch(createProjectStartAction());
+    dispatch(createProjectStartAction());
     try {
       const thumbnail = generateGradientThumbnail();
       const result = await fetchMutation(api.projects.createProject, {
@@ -67,18 +67,19 @@ export const useProjectCreation = () => {
         },
         thumbnail,
       });
-      // dispatch(
-      //   addProject({
-      //     _id: result.projectId,
-      //     name: result.name,
-      //     projectNumber: result.projectNumber,
-      //     thumbnail,
-      //     lastModified: Date.now(),
-      //     createdAt: Date.now(),
-      //     isPublic: false,
-      //   })
-      // );
+      dispatch(
+        addProject({
+          _id: result.projectId,
+          name: result.name,
+          projectNumber: result.projectNumber,
+          thumbnail,
+          lastModified: Date.now(),
+          createdAt: Date.now(),
+          isPublic: false,
+        })
+      );
       toast.success("Project is Successfully Created")
+      dispatch(createProjectSuccess())
     } catch (error) {
       console.log(error);
     }
